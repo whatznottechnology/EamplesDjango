@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'img/whatznotlogo.png' %}">
+    <title>{% block title %}Examples{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        '000814': '#000814',
+                        '001d3d': '#001d3d',
+                        '003566': '#003566',
+                        'ffc300': '#ffc300',
+                        'ffd60a': '#ffd60a',
+                    },
+                    container: {
+                        center: true,
+                        padding: {
+                            DEFAULT: '1rem',
+                            sm: '2rem',
+                            lg: '4rem',
+                            xl: '5rem',
+                            '2xl': '6rem',
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .aspect-w-16 {
+                position: relative;
+                padding-bottom: 56.25%;
+            }
+            .aspect-w-16 > * {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+            .aspect-w-5 {
+                position: relative;
+                padding-bottom: 180%;
+            }
+            .aspect-w-5 > * {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+    <main class="w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white dark:bg-gray-800 shadow-lg mt-8 border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto py-4 px-4 text-center text-gray-600 dark:text-gray-400">
+            <p>&copy; {% now "Y" %} Examples. All rights reserved.</p>
+        </div>
+    </footer>
+    {% block extra_body %}{% endblock %}
+</body>
+</html> 

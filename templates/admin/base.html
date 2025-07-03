@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+
+{% load i18n %}
+ {% block userlinks %}
+    {% if site_url %}
+        <a href="{{ site_url }}">{% trans 'View site' %}</a> /
+    {% endif %}
+    {% if user.is_active and user.is_staff %}
+        {% url 'django-admindocs-docroot' as docsroot %}
+        {% if docsroot %}
+            <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
+        {% endif %}
+    {% endif %}
+    {% if user.has_usable_password %}
+        <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> /
+    {% endif %}
+    <form id="logout-form" method="post" action="{% url 'admin:logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" style="background: none; border: none; color: var(--link-fg); cursor: pointer; padding: 0; font: inherit;">
+            {% trans 'Log out' %}
+        </button>
+    </form>
+{% endblock %}
